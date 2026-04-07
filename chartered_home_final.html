@@ -1,0 +1,748 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chartered Studies | India's Most Trusted EdTech for Professionals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #00BCD4;
+            --primary-dark: #0097A7;
+            --primary-light: #E0F7FA;
+            --secondary: #26C6DA;
+            --accent: #B2EBF2;
+            --dark-bg: #FFFFFF;
+            --section-alt: #F8FDFF;
+            --card-bg: #FFFFFF;
+            --border: #E0F2F1;
+            --text-main: #263238;
+            --text-muted: #546E7A;
+            --shadow: 0 10px 30px -5px rgba(0, 188, 212, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(0, 188, 212, 0.12);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white !important;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 188, 212, 0.25);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(0, 188, 212, 0.35);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary) !important;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-muted);
+            transition: all 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .dropdown-item:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .hero-section {
+            background: radial-gradient(circle at 70% 30%, var(--primary-light) 0%, transparent 60%);
+        }
+
+        .slider-container {
+            width: 100%;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-light);
+            background-size: cover;
+            background-position: center;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .slide-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 25px;
+            border-radius: 10px;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-active .accordion-content {
+            max-height: 200px;
+        }
+
+        .kuse-branding {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .kuse-branding:hover {
+            color: #ffffff;
+        }
+
+        .kuse-branding svg {
+            height: 1.2em;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+    
+/* IMPROVED TEXT VISIBILITY ON LIGHT BACKGROUNDS */
+
+.glass, .glass-card {
+    color: #0F172A;
+}
+
+.text-slate-400,
+.text-slate-500 {
+    color: #0891B2 !important;
+}
+
+.glass h1, .glass h2, .glass h3,
+.glass-card h1, .glass-card h2, .glass-card h3 {
+    color: #0F172A;
+}
+
+.glass p, .glass-card p {
+    color: #0EA5E9;
+}
+
+.accordion-content {
+    color: #0284C7;
+}
+
+.modal .text-slate-400 {
+    color: #0369A1 !important;
+}
+
+footer a {
+    color: #38BDF8;
+}
+
+footer a:hover {
+    color: #0EA5E9;
+}
+
+</style>
+</head>
+<body class="bg-[#0F172A] text-slate-200">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-[rgba(255,255,255,0.05)]">
+        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-[#30c7b5]/10 rounded-lg flex items-center justify-center overflow-hidden border border-[#30c7b5]/20">
+                    <!-- Placeholder for Logo Image -->
+                    <svg class="w-8 h-8 text-[#30c7b5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <span class="text-2xl font-bold gradient-text">Chartered Studies</span>
+            </div>
+            
+            
+<div class="hidden md:flex items-center gap-8">
+    <a href="#home" class="hover:text-[#00BCD4] transition-colors">Home</a>
+    <a href="about.html" class="hover:text-[#00BCD4] transition-colors">About</a>
+    <a href="#services" class="hover:text-[#00BCD4] transition-colors">Services</a>
+    <a href="#contact" class="hover:text-[#00BCD4] transition-colors">Contact</a>
+    <a href="privacy.html" class="hover:text-[#00BCD4] transition-colors">Privacy</a>
+    <a href="terms.html" class="hover:text-[#00BCD4] transition-colors">Terms</a>
+    <a href="refund.html" class="hover:text-[#00BCD4] transition-colors">Refund</a>
+    <a href="shipping.html" class="hover:text-[#00BCD4] transition-colors">Shipping</a>
+</div>
+
+                </div>
+            </div>
+
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-btn" class="p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center animate-in">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                India's Most Popular &amp; Trusted EdTech Brand in <br>
+                <span class="gradient-text">Professional Studies !</span>
+            </h1>
+            <p class="text-lg md:text-xl text-slate-400 mb-10 max-w-3xl mx-auto">
+                Chartered Studies is not just a Community but it's a Revolution !!
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-16">
+                <a href="#" class="btn-primary px-8 py-4 rounded-full font-semibold flex items-center gap-2">
+                    Coaching / Academy
+                </a>
+                <a href="#" class="px-8 py-4 rounded-full font-semibold glass border border-[rgba(255,255,255,0.1)] hover:bg-white/5 transition-all">
+                    Test Series
+                </a>
+                <button class="px-8 py-4 rounded-full font-semibold bg-slate-800 text-slate-500 cursor-not-allowed">
+                    Skill Development (Coming Soon)
+                </button>
+            </div>
+
+            <!-- Banner Slider -->
+            <div class="slider-container max-w-5xl mx-auto rounded-3xl border border-[rgba(255,255,255,0.05)] overflow-hidden">
+                
+<div class="slider-track" id="hero-slider">
+    <div class="slide"><!-- Replace with <img src="banner1.jpg" /> --></div>
+    <div class="slide"><!-- Replace with <img src="banner2.jpg" /> --></div>
+    <div class="slide"><!-- Replace with <img src="banner3.jpg" /> --></div>
+    <div class="slide"><!-- Replace with <img src="banner4.jpg" /> --></div>
+</div>
+
+</div>
+                    <div class="slide">
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold mb-2">Trusted by 310K+ Students</h3>
+                            <p class="text-slate-400">Join India's largest professional student network</p>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="text-center">
+                            <h3 class="text-2xl font-bold mb-2">Premium Test Series</h3>
+                            <p class="text-slate-400">Highly curated papers with detailed evaluation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="py-16 text-center">
+    <h2 class="text-2xl font-bold mb-4">We are a Government Recognized Startup</h2>
+    <div class="mx-auto w-64 h-40 border-2 border-dashed border-cyan-400 flex items-center justify-center text-cyan-400">
+        Certificate Image Space
+    </div>
+</section>
+
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-[#0A0F1C]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+                <div class="w-20 h-1 bg-[#0085FF] mx-auto rounded-full"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-[24px] text-center flex flex-col items-center">
+                    <div class="w-16 h-16 bg-[#0085FF]/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-[#0085FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Coaching / Academy</h3>
+                    <p class="text-slate-400 mb-8 text-sm">Join Coaching Classes with the Top CA Faculties of India for your Exam Preparation</p>
+                    <a href="#" class="mt-auto px-6 py-2 rounded-lg bg-[#0085FF] text-sm font-medium hover:bg-[#0085FF]/80 transition-all">Click Here</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-[24px] text-center flex flex-col items-center">
+                    <div class="w-16 h-16 bg-[#A78BFA]/10 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-[#A78BFA]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Test Series</h3>
+                    <p class="text-slate-400 mb-8 text-sm">Join India's Most Popular &amp; Affordable Test Series Program for CMA, CS &amp; CA Students</p>
+                    <a href="#" class="mt-auto px-6 py-2 rounded-lg bg-[#0085FF] text-sm font-medium hover:bg-[#0085FF]/80 transition-all">Click Here</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-[24px] text-center flex flex-col items-center border-dashed">
+                    <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Skill Development</h3>
+                    <p class="text-slate-400 mb-8 text-sm">Learn High Demand Skills directly from Industry Experts!</p>
+                    <button class="mt-auto px-6 py-2 rounded-lg bg-slate-800 text-slate-500 text-sm font-medium cursor-not-allowed">Coming Soon</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[#0085FF]/5 blur-[120px] rounded-full -z-10"></div>
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="glass-card p-12 md:p-20 rounded-[40px] max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">Chartered Studies <br><span class="gradient-text">Student's Community</span></h2>
+                <p class="text-slate-400 text-lg mb-10">The only Student's Community in India for the Future ambassadors of the Indian Economy.</p>
+                <a href="#" class="btn-primary inline-flex px-10 py-4 rounded-full font-bold shadow-xl">Join Our Free Community</a>
+            </div>
+        </div>
+    </section>
+
+    
+
+    
+
+    <!-- FAQ Section -->
+    <section class="py-20">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="glass rounded-2xl overflow-hidden accordion-item border border-white/5">
+                    <button class="w-full p-6 text-left flex justify-between items-center accordion-btn hover:bg-white/5 transition-all">
+                        <span class="font-semibold">Is there any Test Series by Chartered Studies?</span>
+                        <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-slate-400 text-sm">
+                            We've our Test Series Programme for all Levels of CA CS CMA with limited seats. It's designed to simulate real exam environments with detailed feedback.
+                        </div>
+                    </div>
+                </div>
+                <!-- FAQ 2 -->
+                <div class="glass rounded-2xl overflow-hidden accordion-item border border-white/5">
+                    <button class="w-full p-6 text-left flex justify-between items-center accordion-btn hover:bg-white/5 transition-all">
+                        <span class="font-semibold">How can Chartered Studies help us in our Articleship?</span>
+                        <svg class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-slate-400 text-sm">
+                            We provide guidance and networking opportunities within our community to help students find quality articleship opportunities and learn practical skills required in the industry.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="py-20 bg-[#0A0F1C]">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">Student Reviews</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Review Card -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold">S</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Sahil Chandak</h4>
+                            <p class="text-[10px] text-slate-500">Kerala</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed italic">"The test series is exceptional. The level of detail in checking is exactly what we need for CA finals."</p>
+                </div>
+                <!-- Review Card -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-500 flex items-center justify-center font-bold">N</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Nishi Kataruka</h4>
+                            <p class="text-[10px] text-slate-500">West Bengal</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed italic">"Chartered Studies has been my go-to for all notifications. Always reliable and ahead of everyone else."</p>
+                </div>
+                <!-- Review Card -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center font-bold">N</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Nikita Chotroda</h4>
+                            <p class="text-[10px] text-slate-500">Rajasthan</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed italic">"Affordable and high quality. The student community is so helpful during exam stress periods."</p>
+                </div>
+                <!-- Review Card -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center font-bold">N</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Naincy Tyagi</h4>
+                            <p class="text-[10px] text-slate-500">Uttar Pradesh</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed italic">"Best platform for professional students. The founders truly care about student success."</p>
+                </div>
+                <!-- Review Card -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-500 flex items-center justify-center font-bold">K</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Kirandeep</h4>
+                            <p class="text-[10px] text-slate-500">Haryana</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed italic">"The academy provides clear concepts. Highly recommended for CMA aspirants."</p>
+                </div>
+                <!-- Review Card -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-teal-500 flex items-center justify-center font-bold">K</div>
+                        <div>
+                            <h4 class="font-bold text-sm">Kriti Kumari</h4>
+                            <p class="text-[10px] text-slate-500">Bihar</p>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed italic">"Changed my perspective on professional studies. It's not just study, it's a movement."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-[#0A0F1C]">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold">Contact Us</h2>
+                <p class="text-slate-400 mt-2">We're here to help you succeed</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl text-center">
+                    <div class="w-12 h-12 bg-[#0085FF]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-6 h-6 text-[#0085FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="font-bold mb-2">Business Enquiries</h3>
+                    <p class="text-xs text-slate-400"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9efcf6ffecffeae8fbecedfbdee7fff6f1f1b0fdf1f3">[email&nbsp;protected]</a></p>
+                    <p class="text-xs text-slate-400"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4e3a2b2f230e2d262f3c3a2b3c2b2a3d3a3b2a272b3d60213c29">[email&nbsp;protected]</a></p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl text-center">
+                    <div class="w-12 h-12 bg-[#0085FF]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-6 h-6 text-[#0085FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    </div>
+                    <h3 class="font-bold mb-2">General Support</h3>
+                    <p class="text-xs text-slate-400">+91 7710889336</p>
+                    <p class="text-xs text-slate-400">+91 9350806110</p>
+                </div>
+
+                <div class="glass-card p-8 rounded-3xl text-center">
+                    <div class="w-12 h-12 bg-[#0085FF]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-6 h-6 text-[#0085FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="font-bold mb-2">Office Address</h3>
+                    <p class="text-xs text-slate-400">Patna, Bihar, India</p>
+                    <p class="text-[10px] text-slate-500 mt-2">H.O: Chartered Studies Hub</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <span class="text-xl font-bold gradient-text">Chartered Studies</span>
+                <p class="text-xs text-slate-500 mt-2">© 2024 Chartered Studies. All rights reserved.</p>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+                <a href="about.html" class="hover:text-white transition-all">About</a>
+                <a href="#contact" class="hover:text-white transition-all">Contact</a>
+                <a href="privacy.html" class="hover:text-white transition-all">Privacy Policy</a>
+                <a href="terms.html" class="hover:text-white transition-all">Terms</a>
+            </div>
+
+            <a href="https://kuse.ai" class="kuse-branding" target="_blank">
+                <span>made with</span>
+                <svg viewBox="0,0,160,44" xmlns="http://www.w3.org/2000/svg"><path d="m.01,20.65C-.43,8.25,9.3-2.03,22.04.34,34.78,2.72,43.29,8.32,43.29,22.9s-8.66,19.01-22.03,20.3C7.9,44.5.46,33.05.01,20.65z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="m146.76,7.94c8.07,0,13.24,6.15,13.24,14.58v1.39h-20.75c.45,4.05,3.51,7.37,8.57,7.37,2.62,0,5.73-1.05,7.62-2.94l2.67,3.83c-2.67,2.55-6.62,3.88-10.9,3.88-8.07,0-14.08-5.6-14.08-14.08,0-7.76,5.67-14.02,13.63-14.02zm0,4.77c-5.01,0-7.29,3.83-7.57,7.1h15.13c-.11-3.16-2.28-7.1-7.57-7.1z" fill="currentColor"></path><path d="m86.64,24.49c0,4.15,2.39,6.84,6.84,6.84,4.4,0,6.84-2.69,6.84-6.84V8.55h5.37v16.33c0,6.7-4.06,11.14-12.21,11.14-8.21,0-12.21-4.5-12.21-11.09V8.55h5.37v15.94zm32.99-16.55c4.49,0,8.06,1.47,10.6,3.86l-2.59,3.81c-2.05-2-5.28-3.08-8.06-3.08-2.88,0-4.84,1.37-4.84,3.32,0,1.91,2.64,2.54,5.81,3.27,4.59,1.08,10.26,2.4,10.26,8.46,0,4.94-3.76,8.41-11.14,8.41-4.98,0-8.94-1.76-11.24-4.11l2.54-4.11c1.86,1.91,5.18,3.67,8.84,3.67,3.91,0,5.57-1.66,5.57-3.62,0-2.3-2.88-2.98-6.21-3.76-4.54-1.08-9.87-2.3-9.87-8.06,0-4.5,4.2-8.06,10.31-8.06zM60.79,20.82,71.44,8.55h6.5L66.46,21.26,78.82,35.44h-6.5l-9.28-11.1-2.25,2.49v8.6h-5.33V8.55h5.33v12.27z" fill="currentColor"></path></svg>
+            </a>
+        </div>
+    </footer>
+
+    
+        </div>
+
+        <!-- Terms Modal -->
+        <div id="modal-terms" class="modal">
+            <div class="glass p-8 rounded-[32px] max-w-2xl w-[90%] max-h-[80vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Terms &amp; Conditions</h2>
+                    <button onclick="closeModal(`terms`)" class="text-slate-400 hover:text-slate-200">✕</button>
+                </div>
+                <div class="text-slate-400 text-sm leading-relaxed">
+                    <p>By using Chartered Studies, you agree to comply with the following terms:</p>
+                    <ul class="list-disc pl-5 mt-4 space-y-2">
+                        <li>All content provided is for educational purposes.</li>
+                        <li>Subscription sharing is strictly prohibited.</li>
+                        <li>Chartered Studies reserves the right to modify service fees.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Refund Modal -->
+        <div id="modal-refund" class="modal">
+            <div class="glass p-8 rounded-[32px] max-w-2xl w-[90%] max-h-[80vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Refund Policy</h2>
+                    <button onclick="closeModal(`refund`)" class="text-slate-400 hover:text-slate-200">✕</button>
+                </div>
+                <div class="text-slate-400 text-sm leading-relaxed">
+                    <p>Our refund policy is as follows:</p>
+                    <p class="mt-4">Test series and digital course subscriptions are generally non-refundable once accessed. For coaching classes, partial refunds may be processed within 7 days of enrollment under specific conditions.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Modal -->
+        <div id="modal-shipping" class="modal">
+            <div class="glass p-8 rounded-[32px] max-w-2xl w-[90%] max-h-[80vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold">Shipping &amp; Delivery</h2>
+                    <button onclick="closeModal(`shipping`)" class="text-slate-400 hover:text-slate-200">✕</button>
+                </div>
+                <div class="text-slate-400 text-sm leading-relaxed">
+                    <p>Physical study materials are shipped via our courier partners within 3-5 business days of order confirmation. Delivery times vary by location (typically 7-10 days).</p>
+                    <p class="mt-4">Digital delivery of course keys and test portal access is immediate upon payment confirmation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.kuse.ai/sdk.prd.js"></script>
+    <script>
+        // Hero Slider Logic
+        const sliderTrack = document.getElementById(`hero-slider`);
+        const slides = document.querySelectorAll(`.slide`);
+        const dots = document.querySelectorAll(`.dot`);
+        let currentSlide = 0;
+
+        function updateSlider() {
+            sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle(`active`, index === currentSlide);
+            });
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlider();
+        }
+
+        function autoSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateSlider();
+        }
+        
+        let slideInterval = setInterval(autoSlide, 4000);
+
+        // Pause on hover
+        document.querySelector('.slider-container').addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+        
+        document.querySelector('.slider-container').addEventListener('mouseleave', () => {
+            slideInterval = setInterval(autoSlide, 4000);
+        });
+
+        // Accordion Logic
+        document.querySelectorAll(`.accordion-btn`).forEach(btn => {
+            btn.addEventListener(`click`, () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains(`accordion-active`);
+                
+                // Close all others
+                document.querySelectorAll(`.accordion-item`).forEach(i => i.classList.remove(`accordion-active`));
+                
+                if (!isActive) {
+                    item.classList.add(`accordion-active`);
+                }
+            });
+        });
+
+        // Modal Logic
+        function openModal(type) {
+            document.getElementById(`modal-${type}`).classList.add(`active`);
+            document.body.style.overflow = `hidden`;
+        }
+
+        function closeModal(type) {
+            document.getElementById(`modal-${type}`).classList.remove(`active`);
+            document.body.style.overflow = `auto`;
+        }
+
+        // Close modal on click outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains(`modal`)) {
+                event.target.classList.remove(`active`);
+                document.body.style.overflow = `auto`;
+            }
+        }
+
+        // Mobile Menu
+        const mobileBtn = document.getElementById(`mobile-menu-btn`);
+        // Basic mobile menu could be added here for a better UI experience
+    </script>
+
+</body></html>
